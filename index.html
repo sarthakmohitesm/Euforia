@@ -83,13 +83,7 @@
 
         /* Interactive Canvas */
         #particleCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: auto;
-            z-index: 10;
+            display: none;
         }
 
         /* Navigation */
@@ -237,20 +231,7 @@
         }
 
         .click-instruction {
-            position: absolute;
-            top: 120px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
-            z-index: 100;
-            pointer-events: none;
-            animation: fadeInUp 1.5s ease, bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
+            display: none;
         }
 
         .cta-button {
@@ -308,40 +289,6 @@
             letter-spacing: 3px;
         }
 
-        /* Category Filter Buttons */
-        .event-categories {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 60px;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            padding: 14px 35px;
-            font-size: 16px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            color: #fff;
-            border: 2px solid rgba(220, 38, 38, 0.3);
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.4s;
-        }
-
-        .category-btn:hover {
-            background: rgba(220, 38, 38, 0.2);
-            transform: translateY(-3px);
-            border-color: #dc2626;
-        }
-
-        .category-btn.active {
-            background: linear-gradient(45deg, #dc2626, #991b1b);
-            border-color: #dc2626;
-            box-shadow: 0 5px 25px rgba(220, 38, 38, 0.5);
-        }
-
         .event-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -351,22 +298,8 @@
             padding: 20px;
         }
 
-        .event-grid::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .event-grid::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-        }
-
-        .event-grid::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, #dc2626, #3b82f6);
-            border-radius: 10px;
-        }
-
         .event-card {
-            min-width: 320px;
+            min-width: 300px;
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(15px);
             border-radius: 25px;
@@ -477,142 +410,6 @@
             opacity: 0.9;
         }
 
-        /* Sponsors Section */
-        .sponsors {
-            padding: 120px 50px;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .sponsors-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .sponsor-tier {
-            margin-bottom: 70px;
-        }
-
-        .tier-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 40px;
-            background: linear-gradient(45deg, #dc2626, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-        }
-
-        .sponsor-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 45px;
-            flex-wrap: wrap;
-        }
-
-        .sponsor-box {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 35px;
-            text-align: center;
-            transition: all 0.4s;
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            cursor: pointer;
-        }
-
-        .sponsor-box:hover {
-            transform: translateY(-12px);
-            background: rgba(220, 38, 38, 0.1);
-            box-shadow: 0 20px 50px rgba(220, 38, 38, 0.4);
-            border-color: #dc2626;
-        }
-
-        .title-sponsor .sponsor-box {
-            width: 300px;
-            height: 220px;
-        }
-
-        .platinum-sponsors .sponsor-box {
-            width: 240px;
-            height: 180px;
-        }
-
-        .gold-sponsors .sponsor-box {
-            width: 200px;
-            height: 160px;
-        }
-
-        .sponsor-placeholder {
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(59, 130, 246, 0.2));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            font-weight: bold;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 18px;
-            height: 130px;
-        }
-
-        .platinum-sponsors .sponsor-placeholder {
-            height: 100px;
-        }
-
-        .gold-sponsors .sponsor-placeholder {
-            height: 80px;
-            font-size: 20px;
-        }
-
-        .sponsor-box p {
-            margin-top: 12px;
-            font-size: 17px;
-            opacity: 0.9;
-        }
-
-        .become-sponsor {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px dashed rgba(220, 38, 38, 0.5);
-            border-radius: 25px;
-            padding: 60px;
-            text-align: center;
-            margin-top: 70px;
-        }
-
-        .become-sponsor h3 {
-            font-size: 40px;
-            margin-bottom: 25px;
-            background: linear-gradient(45deg, #dc2626, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-        }
-
-        .become-sponsor p {
-            font-size: 19px;
-            margin-bottom: 35px;
-            opacity: 0.9;
-        }
-
-        .sponsor-cta {
-            padding: 16px 45px;
-            font-size: 17px;
-            background: linear-gradient(45deg, #dc2626, #991b1b);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.4s;
-            box-shadow: 0 10px 35px rgba(220, 38, 38, 0.5);
-        }
-
-        .sponsor-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 45px rgba(220, 38, 38, 0.7);
-        }
-
         /* Footer */
         footer {
             background: rgba(0, 0, 0, 0.7);
@@ -652,31 +449,383 @@
             transform: translateY(0);
         }
 
-        @media (max-width: 768px) {
+        /* Mobile Menu Icon */
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu-icon div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .menu-icon.active div:nth-child(1) {
+            transform: rotate(45deg) translateY(8px);
+        }
+
+        .menu-icon.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-icon.active div:nth-child(3) {
+            transform: rotate(-45deg) translateY(-8px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
             .hero h1 {
-                font-size: 70px;
+                font-size: 90px;
+                letter-spacing: 5px;
             }
-            
-            nav {
-                padding: 15px 20px;
-            }
-            
-            .nav-links {
-                gap: 15px;
-                font-size: 14px;
-            }
-            
-            .logo {
+
+            .hero p {
                 font-size: 22px;
             }
 
-            .event-card {
-                min-width: 280px;
+            .event-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 25px;
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 48px;
+                margin-bottom: 50px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .menu-icon {
+                display: flex;
+            }
+
+            nav {
+                padding: 20px 30px;
+            }
+
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 0;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                transition: 0.5s ease;
+                z-index: 999;
+                border-left: 1px solid rgba(220, 38, 38, 0.3);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 20px;
+            }
+
+            .logo {
+                font-size: 26px;
+                letter-spacing: 2px;
+            }
+
+            .events, .about {
+                padding: 80px 30px;
+            }
+
+            .hero h1 {
+                font-size: 70px;
+                letter-spacing: 4px;
+            }
+
+            .hero p {
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+
+            .cta-button {
+                padding: 15px 40px;
+                font-size: 16px;
+            }
+
+            .event-grid {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 22px;
+                letter-spacing: 1px;
+            }
+
+            .hero {
+                padding: 0 15px;
+                height: 100vh;
+                min-height: 600px;
+            }
+
+            .hero h1 {
+                font-size: 55px;
+                letter-spacing: 3px;
+                margin-bottom: 15px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+                margin-bottom: 30px;
+                letter-spacing: 0.5px;
+            }
+
+            .hero::before {
+                width: 400px;
+                height: 400px;
             }
 
             .click-instruction {
                 font-size: 14px;
-                top: 100px;
+                top: 90px;
+            }
+
+            .cta-button {
+                padding: 14px 35px;
+                font-size: 15px;
+            }
+
+            .events, .about {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                font-size: 38px;
+                margin-bottom: 40px;
+                letter-spacing: 2px;
+            }
+
+            .event-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 10px;
+            }
+
+            .event-card {
+                min-width: 100%;
+            }
+
+            .event-image {
+                height: 180px;
+            }
+
+            .event-icon {
+                font-size: 70px;
+            }
+
+            .event-content {
+                padding: 25px;
+            }
+
+            .event-card h3 {
+                font-size: 24px;
+                margin-bottom: 12px;
+            }
+
+            .event-card p {
+                font-size: 14px;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+
+            .register-btn {
+                padding: 12px 25px;
+                font-size: 14px;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .about p {
+                font-size: 18px;
+                line-height: 1.7;
+            }
+
+            footer {
+                padding: 40px 20px;
+            }
+
+            .social-links {
+                gap: 25px;
+            }
+
+            .social-links a {
+                font-size: 28px;
+            }
+
+            footer p {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 12px 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .menu-icon div {
+                width: 22px;
+                height: 2.5px;
+            }
+
+            .nav-links {
+                width: 80%;
+            }
+
+            .hero {
+                min-height: 550px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+                letter-spacing: 2px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero::before {
+                width: 300px;
+                height: 300px;
+            }
+
+            .click-instruction {
+                font-size: 12px;
+                top: 80px;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 14px;
+            }
+
+            .events, .about {
+                padding: 50px 15px;
+            }
+
+            .section-title {
+                font-size: 32px;
+                margin-bottom: 30px;
+            }
+
+            .event-grid {
+                gap: 15px;
+            }
+
+            .event-image {
+                height: 160px;
+            }
+
+            .event-icon {
+                font-size: 60px;
+            }
+
+            .event-content {
+                padding: 20px;
+            }
+
+            .event-card h3 {
+                font-size: 22px;
+            }
+
+            .event-card p {
+                font-size: 13px;
+            }
+
+            .register-btn {
+                padding: 10px 22px;
+                font-size: 13px;
+            }
+
+            .about p {
+                font-size: 16px;
+            }
+
+            footer {
+                padding: 30px 15px;
+            }
+
+            .social-links {
+                gap: 20px;
+            }
+
+            .social-links a {
+                font-size: 24px;
+            }
+
+            .circle {
+                display: none;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .event-card h3 {
+                font-size: 20px;
+            }
+        }
+
+        /* Landscape orientation on mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 100px 20px 50px;
+            }
+
+            .hero h1 {
+                font-size: 50px;
+            }
+
+            .hero p {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            .cta-button {
+                padding: 10px 25px;
+                font-size: 14px;
+            }
+
+            .click-instruction {
+                display: none;
             }
         }
     </style>
@@ -693,23 +842,23 @@
     <!-- Navigation -->
     <nav>
         <div class="logo">EUFORIA</div>
+        <div class="menu-icon">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#events">Events</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#sponsors">Sponsors</a></li>
             <li><a href="#contact">Contact</a></li>
-            
         </ul>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <canvas id="particleCanvas"></canvas>
-        <div class="click-instruction"></div>
         <h1>EUFORIA</h1>
         <p>Experience the Ultimate College Festival</p>
-        
     </section>
 
     <!-- Events Section -->
@@ -723,13 +872,11 @@
                     <div class="event-icon">🎤</div>
                 </div>
                 <div class="event-content">
-                    <h3>Stage Event </h3>
+                    <h3>Stage Event</h3>
                     <p>Showcase your dance moves and compete with talented performers from various colleges. All dance styles welcome!</p>
-                   <a href="Stage event.html">   <button class="register-btn">Register Now</button></a>
+                    <a href="Stage event.html"><button class="register-btn">Register Now</button></a>
                 </div>
             </div>
-            
-         
             
             <!-- Non-Stage Events -->
             <div class="event-card" data-type="non-stage">
@@ -739,12 +886,10 @@
                 <div class="event-content">
                     <h3>Non Stage Event</h3>
                     <p>Display your artistic talent through paintings, sculptures, and digital art in our prestigious exhibition.</p>
-                   <a href="NonStage.html"> <button class="register-btn">Register Now</button></a>
+                    <a href="NonStage.html"><button class="register-btn">Register Now</button></a>
                 </div>
             </div>
 
-           
-            
             <!-- Mobile Games -->
             <div class="event-card" data-type="mobile">
                 <div class="event-image" style="background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%);">
@@ -753,11 +898,9 @@
                 <div class="event-content">
                     <h3>Esports</h3>
                     <p>Battle it out in PUBG Mobile! Squad up and compete for the ultimate victory royale.</p>
-                   <a href="esports.html"><button class="register-btn">Register Now</button></a>
+                    <a href="esports.html"><button class="register-btn">Register Now</button></a>
                 </div>
             </div>
-            
-            
 
             <!-- Indoor Sports -->
             <div class="event-card" data-type="indoor">
@@ -767,11 +910,9 @@
                 <div class="event-content">
                     <h3>Art</h3>
                     <p>Showcase your creativity in our art competition. Paint, draw, or create digital art to win exciting prizes!</p>
-                   <a href="art.html"><button class="register-btn">Register Now</button></a>
+                    <a href="art.html"><button class="register-btn">Register Now</button></a>
                 </div>
             </div>
-
-           
         </div>
     </section>
 
@@ -781,198 +922,41 @@
         <p>Euforia is the most awaited annual college festival that brings together students from across the country. With a perfect blend of music, art, culture, and entertainment, we create memories that last a lifetime. Join us for three days of non-stop excitement, creativity, and celebration!</p>
     </section>
 
-  
-
     <!-- Footer -->
     <footer id="contact">
         <div class="social-links">
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
+            <a href="#" aria-label="Social Media 1">📱</a>
+            <a href="#" aria-label="Social Media 2">💬</a>
+            <a href="#" aria-label="Social Media 3">📧</a>
+            <a href="#" aria-label="Social Media 4">🌐</a>
         </div>
         <p>&copy; 2026 Euforia College Fest. All rights reserved.</p>
     </footer>
 
     <script>
-        // Particle Canvas Animation
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
+        // Mobile Menu Functionality
+        const menuIcon = document.querySelector('.menu-icon');
+        const navLinks = document.querySelector('.nav-links');
         
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuIcon.classList.toggle('active');
         });
 
-        const particles = [];
-        const sparks = [];
-        const colors = ['#dc2626', '#3b82f6', '#fbbf24', '#f97316', '#8b5cf6', '#ec4899'];
-
-        class Particle {
-            constructor(x, y, angle, speed, color) {
-                this.x = x;
-                this.y = y;
-                this.vx = Math.cos(angle) * speed;
-                this.vy = Math.sin(angle) * speed;
-                this.life = 1;
-                this.decay = Math.random() * 0.012 + 0.008;
-                this.size = Math.random() * 4 + 2;
-                this.color = color;
-                this.gravity = 0.08;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.vy += this.gravity;
-                this.vx *= 0.99;
-                this.vy *= 0.99;
-                this.life -= this.decay;
-                this.size *= 0.97;
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.life;
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = this.color;
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Trail
-                ctx.fillStyle = this.color;
-                ctx.globalAlpha = this.life * 0.3;
-                ctx.beginPath();
-                ctx.arc(this.x - this.vx * 2, this.y - this.vy * 2, this.size * 0.5, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            }
-        }
-
-        class Spark {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.radius = 0;
-                this.maxRadius = 60;
-                this.alpha = 1;
-            }
-
-            update() {
-                this.radius += 4;
-                this.alpha -= 0.04;
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.strokeStyle = '#fff';
-                ctx.lineWidth = 3;
-                ctx.shadowBlur = 20;
-                ctx.shadowColor = '#dc2626';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.stroke();
-                
-                ctx.lineWidth = 1.5;
-                ctx.globalAlpha = this.alpha * 0.5;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius * 0.7, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.restore();
-            }
-        }
-
-        function createExplosion(x, y) {
-            sparks.push(new Spark(x, y));
-            
-            const particleCount = 40;
-            for (let i = 0; i < particleCount; i++) {
-                const angle = (Math.PI * 2 * i) / particleCount + Math.random() * 0.3;
-                const speed = Math.random() * 6 + 3;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                particles.push(new Particle(x, y, angle, speed, color));
-            }
-            
-            for (let i = 0; i < 15; i++) {
-                const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 10 + 2;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                particles.push(new Particle(x, y, angle, speed, color));
-            }
-        }
-
-        canvas.addEventListener('click', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            createExplosion(x, y);
-        });
-
-        function animate() {
-            ctx.fillStyle = 'rgba(10, 10, 10, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].update();
-                particles[i].draw();
-
-                if (particles[i].life <= 0 || particles[i].size <= 0.5) {
-                    particles.splice(i, 1);
-                }
-            }
-
-            for (let i = sparks.length - 1; i >= 0; i--) {
-                sparks[i].update();
-                sparks[i].draw();
-
-                if (sparks[i].alpha <= 0 || sparks[i].radius >= sparks[i].maxRadius) {
-                    sparks.splice(i, 1);
-                }
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-
-        // Category filter functionality
-        const categoryBtns = document.querySelectorAll('.category-btn');
-        const eventCards = document.querySelectorAll('.event-card');
-
-        categoryBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                categoryBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const category = btn.getAttribute('data-category');
-
-                eventCards.forEach(card => {
-                    const cardType = card.getAttribute('data-type');
-                    
-                    if (category === 'all') {
-                        card.classList.remove('hidden');
-                    } else if (cardType === category) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('active');
             });
         });
 
-        // Register button functionality
-        document.querySelectorAll('.register-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const eventName = btn.closest('.event-card').querySelector('h3').textContent;
-                
-            });
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuIcon.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('active');
+            }
         });
 
         // Smooth scroll animation observer
@@ -991,19 +975,11 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth' });
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             });
         });
-
-        // CTA Button action
-        document.querySelector('.cta-button').addEventListener('click', () => {
-            
-        });
-
-        // Sponsor CTA Button action
-        document.querySelector('.sponsor-cta').addEventListener('click', () => {
-            alert('Thank you for your interest! Our sponsorship team will contact you soon.');
-        });
-        </script>
+    </script>
 </body>
 </html>
