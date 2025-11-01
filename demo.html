@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euforia 2026 - Registration Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.15), rgba(59, 130, 246, 0.1));
+            animation: float 20s infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 90px;
+            height: 90px;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            left: 40%;
+            animation-delay: 4s;
+        }
+
+        .circle:nth-child(4) {
+            width: 70px;
+            height: 70px;
+            left: 80%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #dc2626, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 700px;
+            margin: 140px auto 60px;
+            padding: 0 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 12px;
+            background: linear-gradient(45deg, #dc2626, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Form Container */
+        .form-wrapper {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            padding: 50px 40px;
+            animation: fadeInUp 0.8s ease;
+            box-shadow: 0 20px 60px rgba(220, 38, 38, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s;
+            resize: vertical;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #dc2626;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #dc2626, #991b1b);
+            color: #fff;
+            border: 2px solid #dc2626;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 10px 40px rgba(220, 38, 38, 0.5);
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(220, 38, 38, 0.7);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-2px);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            animation: slideIn 0.4s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .success-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .success-text {
+            font-size: 15px;
+            color: #86efac;
+            font-weight: 600;
+        }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #fca5a5;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            opacity: 0.6;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .container {
+                margin: 110px auto 40px;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+            .form-wrapper {
+                padding: 35px 25px;
+            }
+
+            input, textarea {
+                padding: 14px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">EUFORIA</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Event Registration</h1>
+            <p>Register for Euforia 2026 now!</p>
+        </div>
+
+        <!-- Form -->
+        <div class="form-wrapper">
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">✅</div>
+                <div class="success-text">Registration Successful! Thank you for registering with Euforia 2026.</div>
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                Please fill in all required fields correctly.
+            </div>
+
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="event">Event Name *</label>
+                    <input type="text" id="event" name="event" placeholder="Enter event name" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Register Now</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Euforia College Fest - Event Registration System</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const event = document.getElementById('event').value.trim();
+
+            // Validation
+            if (!name || !email || !phone || !event) {
+                errorMessage.textContent = 'Please fill in all required fields.';
+                errorMessage.classList.add('show');
+                setTimeout(() => errorMessage.classList.remove('show'), 4000);
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMessage.textContent = 'Please enter a valid email address.';
+                errorMessage.classList.add('show');
+                setTimeout(() => errorMessage.classList.remove('show'), 4000);
+                return;
+            }
+
+            // Phone validation
+            if (phone.length !== 10 || isNaN(phone)) {
+                errorMessage.textContent = 'Please enter a valid 10-digit phone number.';
+                errorMessage.classList.add('show');
+                setTimeout(() => errorMessage.classList.remove('show'), 4000);
+                return;
+            }
+
+            // Show success message
+            successMessage.classList.add('show');
+            
+            // Log registration data (in a real app, this would be sent to backend)
+            const registrationData = {
+                name: name,
+                email: email,
+                phone: phone,
+                event: event,
+                timestamp: new Date().toLocaleString()
+            };
+            
+            console.log('Registration Data:', registrationData);
+
+            // Reset form
+            form.reset();
+
+            // Hide success message after 4 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 4000);
+        });
+    </script>
+</body>
+</html>

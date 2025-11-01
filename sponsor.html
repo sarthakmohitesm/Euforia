@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Sponsors - Euforia 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.15), rgba(59, 130, 246, 0.1));
+            animation: float 20s infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 90px;
+            height: 90px;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            left: 40%;
+            animation-delay: 4s;
+        }
+
+        .circle:nth-child(4) {
+            width: 70px;
+            height: 70px;
+            left: 80%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            animation: slideDown 0.8s ease;
+            border-bottom: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #dc2626, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #dc2626;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #dc2626, #3b82f6);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .sponsor-hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 0;
+            position: relative;
+        }
+
+        .sponsor-hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.15), transparent);
+            filter: blur(80px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .sponsor-hero h1 {
+            font-size: 80px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #dc2626, #3b82f6, #dc2626);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 4px;
+            position: relative;
+            z-index: 100;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .sponsor-hero p {
+            font-size: 24px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 100;
+            letter-spacing: 2px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        /* Sponsors Section */
+        .sponsors-content {
+            padding: 80px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 56px;
+            margin-bottom: 70px;
+            background: linear-gradient(45deg, #dc2626, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            letter-spacing: 3px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .sponsor-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            transition: all 0.4s;
+            cursor: pointer;
+            position: relative;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(220, 38, 38, 0.4), 0 0 50px rgba(59, 130, 246, 0.2);
+            border-color: #dc2626;
+        }
+
+        .sponsor-image-wrapper {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(59, 130, 246, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .sponsor-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .sponsor-card:hover .sponsor-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .sponsor-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.15), rgba(59, 130, 246, 0.15));
+        }
+
+        .sponsor-info {
+            padding: 30px;
+        }
+
+        .sponsor-info h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .sponsor-info p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .view-sponsor-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #dc2626, #991b1b);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        .view-sponsor-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(220, 38, 38, 0.6);
+        }
+
+        /* Modal Popup Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: relative;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+            backdrop-filter: blur(15px);
+            margin: 5% auto;
+            padding: 50px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(220, 38, 38, 0.3);
+            animation: slideUp 0.5s ease;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(80px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            font-size: 36px;
+            font-weight: bold;
+            color: rgba(220, 38, 38, 0.6);
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: #dc2626;
+            background: rgba(220, 38, 38, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(59, 130, 246, 0.2));
+            border-radius: 20px;
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-image-placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 16px;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .modal h2 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #dc2626, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal p {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .modal-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #dc2626, #991b1b);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        .modal-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(220, 38, 38, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 50px;
+            text-align: center;
+            border-top: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 25px;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 32px;
+            transition: all 0.4s;
+        }
+
+        .social-links a:hover {
+            color: #dc2626;
+            transform: scale(1.3);
+            filter: drop-shadow(0 0 10px rgba(220, 38, 38, 0.8));
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .sponsor-hero h1 {
+                font-size: 50px;
+            }
+
+            .sponsor-hero p {
+                font-size: 18px;
+            }
+
+            .sponsors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sponsors-content {
+                padding: 50px 20px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20% auto;
+                padding: 30px;
+            }
+
+            .close-btn {
+                right: 15px;
+                top: 15px;
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">EUFORIA</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#sponsors">Sponsors</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="sponsor-hero">
+        <h1>Our Sponsors</h1>
+        <p>Meet the amazing organizations making Euforia possible</p>
+    </section>
+
+    <!-- Sponsors Content -->
+    <section class="sponsors-content">
+        <div class="sponsors-grid" id="sponsorsGrid"></div>
+    </section>
+
+    <!-- Modal Template -->
+    <div id="sponsorModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-image">
+                <img id="modalImage" style="display:none;">
+                <div id="modalImagePlaceholder" class="modal-image-placeholder">🏢 Sponsor Logo</div>
+            </div>
+            <h2 id="modalName"></h2>
+            <p id="modalDescription"></p>
+            <a id="modalLink" class="modal-link" href="#" target="_blank">Visit Website</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="social-links">
+            <a href="#">📘</a>
+            <a href="#">📷</a>
+            <a href="#">🐦</a>
+            <a href="#">💼</a>
+        </div>
+        <p>&copy;</p>
+    </footer>
+
+    <script>
+        // Sponsor Data - EDIT THIS SECTION TO ADD YOUR SPONSORS
+        const sponsors = [
+            {
+                id: 1,
+                name: "Red Bull",
+                shortDesc: "Energy Partner",
+                fullDesc: "A pioneer inspired by functional drinks from East Asia, Dietrich Mateschitz founded Red Bull in the mid-1980s. He developed not only a new product but also a unique marketing concept and launched Red Bull Energy Drink in Austria on April 1, 1987. A completely new product category was born – energy drinks.ng technology company dedicated to innovation and digital transformation. Supporting Euforia to inspire the next generation of tech leaders and innovators.",
+                imageUrl: "Red Bull.png",
+                website: "https://example.comhttps://www.redbull.com/in-en",
+                imageAlt: "Red Bull Logo"
+            },
+            {
+                id: 2,
+                name: "Max Fashion",
+                shortDesc: "Fashion Partner",
+                fullDesc: "Launched in the UAE in May 2004, Max Fashion is now in over 850+ stores across 20 countries. We opened doors in Indore, India in 2006. There has been no looking back. Our reach in the country today extends to 200+ cities, boasting a loyal customer base of close to 35 million. We also provide a hassle free, 24 X 7 shopping experience on maxfashion.com & Max Fashion Apps where our customers can choose from a variety of 15000+ styles.",
+                imageUrl: "Max Fashion.png", // Add image URL here
+                website: "https://example.com",
+                imageAlt: "Max Fashion Logo"
+            },
+            {
+                id: 3,
+                name: "Upthrust",
+                shortDesc: "Gaming Partner",
+                fullDesc: "Upthrust Esports was founded on 16th April 2020 with main motive to promote and develop esports in India🇮🇳 and provide better practising platform to the gamers🎮. Working with a motive to Empower Esports In India. We are well known for building some of the biggest esports IPs in the country which are diversified into all categories of gaming (Mobile,PC,Console,VR).",
+                imageUrl: "Upthrust.png", // Add image URL here
+                website: "https://example.com",
+                imageAlt: "Upthrust Logo"
+            },
+            {
+                id: 4,
+                name: "NJ Creations and Arts",
+                shortDesc: "Sketch Partner",
+                fullDesc: "",
+                imageUrl: "NJ.png", // Add image URL here
+                website: "NJ.png",
+                imageAlt: "NJ Creations and arts Logo"
+            },
+            {
+                id: 5,
+                name: "Breezy Cafe",
+                shortDesc: "Food Partner",
+                fullDesc: "",
+                imageUrl: "Breezy.png", // Add image URL here
+                website: "",
+                imageAlt: "Breezy Logo"
+            },
+            {
+                id: 6,
+                name: "Lavish",
+                shortDesc: "Fashion Partner",
+                fullDesc: "",
+                imageUrl: "Lavish.png", // Add image URL here
+                website: "https://example.com",
+                imageAlt: "Lavish Logo"
+            }
+            
+        
+        ];
+
+        // Initialize sponsors on page load
+        function initSponsors() {
+            const grid = document.getElementById('sponsorsGrid');
+            sponsors.forEach(sponsor => {
+                const card = document.createElement('div');
+                card.className = 'sponsor-card';
+                card.onclick = () => openModal(sponsor);
+                
+                card.innerHTML = `
+                    <div class="sponsor-image-wrapper">
+                        ${sponsor.imageUrl 
+                            ? `<img src="${sponsor.imageUrl}" alt="${sponsor.imageAlt}">` 
+                            : `<div class="sponsor-placeholder">🏢 ${sponsor.imageAlt}</div>`
+                        }
+                    </div>
+                    <div class="sponsor-info">
+                        <h3>${sponsor.name}</h3>
+                        <p>${sponsor.fullDesc.substring(0, 90)}...</p>
+                        <button class="view-sponsor-btn">View Details</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Open modal with sponsor details
+        function openModal(sponsor) {
+            const modal = document.getElementById('sponsorModal');
+            document.getElementById('modalName').textContent = sponsor.name;
+            document.getElementById('modalDescription').textContent = sponsor.fullDesc;
+            document.getElementById('modalLink').href = sponsor.website;
+            
+            const modalImage = document.getElementById('modalImage');
+            const placeholder = document.getElementById('modalImagePlaceholder');
+            
+            if (sponsor.imageUrl) {
+                modalImage.src = sponsor.imageUrl;
+                modalImage.style.display = 'block';
+                placeholder.style.display = 'none';
+            } else {
+                modalImage.style.display = 'none';
+                placeholder.style.display = 'flex';
+                placeholder.textContent = `🏢 ${sponsor.imageAlt}`;
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('sponsorModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('sponsorModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initSponsors);
+    </script>
+</body>
+</html>

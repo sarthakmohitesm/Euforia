@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <style>
+        /* Keep all your existing styles */
+        
+        /* Add these styles for form handling feedback */
+        .response-message {
+            display: none;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: rgba(34, 197, 94, 0.2);
+            border: 2px solid #22c55e;
+            color: #86efac;
+        }
+
+        .error {
+            background-color: rgba(239, 68, 68, 0.2);
+            border: 2px solid #ef4444;
+            color: #fca5a5;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal" id="registrationModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Event Registration</h2>
+            <div id="responseMessage" class="response-message"></div>
+            <form id="registrationForm" action="http://localhost:3000/send" method="post">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="number">Phone Number:</label>
+                    <input type="text" name="number" id="number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="event">Event Name:</label>
+                    <input type="text" name="event" id="event" readonly required>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Details</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const responseMessage = document.getElementById('responseMessage');
+            
+            try {
+                const formData = new FormData(form);
+                const response = await fetch('http://localhost:3000/send', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    responseMessage.textContent = result.message;
+                    responseMessage.className = 'response-message success';
+                    form.reset();
+                    setTimeout(() => {
+                        responseMessage.style.display = 'none';
+                        // Close the modal after successful submission
+                        document.getElementById('registrationModal').style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error(result.error || 'Registration failed');
+                }
+            } catch (error) {
+                responseMessage.textContent = error.message;
+                responseMessage.className = 'response-message error';
+            }
+            
+            responseMessage.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

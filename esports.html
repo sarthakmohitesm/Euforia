@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esports Events - Euforia 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.1));
+            animation: float 20s infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 90px;
+            height: 90px;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            left: 40%;
+            animation-delay: 4s;
+        }
+
+        .circle:nth-child(4) {
+            width: 70px;
+            height: 70px;
+            left: 80%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            animation: slideDown 0.8s ease;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 120px auto 50px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 56px;
+            margin-bottom: 70px;
+            background: linear-gradient(45deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .event-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .event-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.4);
+            border-color: #8b5cf6;
+        }
+
+        .event-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+            overflow: hidden;
+        }
+
+        .event-icon {
+            font-size: 64px;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .event-content {
+            padding: 30px;
+            text-align: left;
+        }
+
+        .event-content h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .event-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .register-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #8b5cf6, #6d28d9);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.4s;
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6);
+        }
+
+        .event-details {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 15px;
+        }
+
+        .event-details span {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .online-badge {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+            color: #22c55e;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .offline-badge {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.2);
+            border: 1px solid #f97316;
+            color: #f97316;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 40px;
+                margin-bottom: 40px;
+            }
+
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">EUFORIA ESPORTS</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="section-title">Esports Events</h1>
+        
+        <div class="event-grid">
+            <!-- Valorant -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🎮</div>
+                </div>
+                <div class="event-content">
+                    <span class="online-badge">ONLINE</span>
+                    <h3>Valorant</h3>
+                    <p>Compete in the tactical FPS that combines precise gunplay with unique agent abilities. Form your squad and dominate!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Team Size: 5</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹500</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- BGMI -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🎮</div>
+                </div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>BGMI</h3>
+                    <p>Battle Grounds Mobile India - Survive, strategize, and be the last squad standing in this intense battle royale!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Team Size: 4</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: Free</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Ludo King -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🎲</div>
+                </div>
+                <div class="event-content">
+                    <span class="online-badge">ONLINE</span>
+                    <h3>Ludo King</h3>
+                    <p>The classic board game goes digital! Roll the dice, strategize your moves, and race to victory!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹100</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Chess Online -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">♟️</div>
+                </div>
+                <div class="event-content">
+                    <span class="online-badge">ONLINE</span>
+                    <h3>Chess Online</h3>
+                    <p>Test your strategic thinking and tactical skills in the ultimate game of intellect. Checkmate your opponents!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹100</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Stumble Guys -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🏃</div>
+                </div>
+                <div class="event-content">
+                    <span class="online-badge">ONLINE</span>
+                    <h3>Stumble Guys</h3>
+                    <p>Navigate through chaotic obstacle courses, outlast opponents, and be the last one standing in this fun party game!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹100</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- 8 Ball Pool -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🎱</div>
+                </div>
+                <div class="event-content">
+                    <span class="online-badge">ONLINE</span>
+                    <h3>8 Ball Pool</h3>
+                    <p>Master the cue, perfect your shots, and sink all your balls before your opponent in this classic pool game!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹100</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- UNO Mobile -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🃏</div>
+                </div>
+                <div class="event-content">
+                    <span class="online-badge">ONLINE</span>
+                    <h3>UNO Mobile</h3>
+                    <p>The beloved card game on mobile! Match colors and numbers, use action cards wisely, and shout UNO to win!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹100</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- 2048 Mobile -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🔢</div>
+                </div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>2048 Mobile</h3>
+                    <p>Merge tiles, reach 2048, and beyond! Test your puzzle-solving skills in this addictive number game!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹100</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- FIFA PS5 1v1 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">⚽</div>
+                </div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>FIFA PS5 1v1</h3>
+                    <p>Experience next-gen football on PS5! Choose your team and compete in thrilling 1v1 matches!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹100</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Freefire -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🔥</div>
+                </div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Freefire</h3>
+                    <p>Drop into the battlefield, loot weapons, and survive in this fast-paced mobile battle royale game!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Team Size: 4</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹200</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Real Cricket -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🏏</div>
+                </div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Real Cricket</h3>
+                    <p>Experience realistic cricket action on mobile! Hit sixes, take wickets, and lead your team to victory!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: Free</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- CS-Go -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🎮</div>
+                </div>
+                <div class="event-content">
+                    <span class="online-badge">ONLINE</span>
+                    <h3>CS-Go</h3>
+                    <p>Counter-Strike: Global Offensive - The legendary tactical shooter. Plan, execute, and eliminate in team-based combat!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Team Size: 5</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹200</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- FIFA Mobile 1v1 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">⚽</div>
+                </div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>FIFA Mobile 1v1</h3>
+                    <p>Take football to your fingertips! Build your ultimate team and compete in mobile football battles!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹100</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- E Football Mobile -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">⚽</div>
+                </div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>E Football Mobile</h3>
+                    <p>The evolution of PES! Experience realistic football gameplay with stunning graphics on mobile!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹100</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <div class="bg-animation">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            
+            <div class="form-wrapper">
+                <span class="close-btn">&times;</span>
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">✅</div>
+                    <div class="success-text">Registration Successful! Thank you for registering with Euforia 2026.</div>
+                </div>
+
+                <div class="error-message" id="errorMessage">
+                    Please fill in all required fields correctly.
+                </div>
+
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="event">Event Name *</label>
+                        <input type="text" id="event" name="event" readonly>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Register Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1;
+        }
+
+        .close-btn:hover {
+            color: #8b5cf6;
+            transform: scale(1.1);
+        }
+
+        /* Form Styles */
+        .form-wrapper {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .success-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .success-text {
+            font-size: 16px;
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #fca5a5;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #8b5cf6, #6d28d9);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('registrationModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const form = document.getElementById('registrationForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const eventInput = document.getElementById('event');
+
+        // Add click handlers for register buttons
+        document.querySelectorAll('.register-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const eventName = this.closest('.event-card').querySelector('h3').textContent;
+                eventInput.value = eventName;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close modal when clicking close button or outside
+        closeBtn.addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            form.reset();
+            successMessage.classList.remove('show');
+            errorMessage.classList.remove('show');
+        }
+
+        // Handle form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Get the submit button
+            const submitBtn = form.querySelector('.submit-btn');
+            
+            // Prevent multiple submissions
+            if (submitBtn.disabled) {
+                return;
+            }
+
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const event = document.getElementById('event').value.trim();
+
+            // Validation
+            if (!name || !email || !phone || !event) {
+                showError('Please fill in all required fields.');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('Please enter a valid email address.');
+                return;
+            }
+
+            // Phone validation
+            if (phone.length !== 10 || isNaN(phone)) {
+                showError('Please enter a valid 10-digit phone number.');
+                return;
+            }
+
+            // Disable submit button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.style.opacity = '0.6';
+            submitBtn.style.cursor = 'not-allowed';
+
+            try {
+                const response = await fetch('http://localhost:3000/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        event: event
+                    })
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    successMessage.classList.add('show');
+                    
+                    // Close modal after showing success
+                    setTimeout(() => {
+                        closeModal();
+                        // Re-enable button when modal is closed
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Register Now';
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.cursor = 'pointer';
+                    }, 2000);
+                } else {
+                    throw new Error('Registration failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Registration failed. Please try again.');
+                // Re-enable button on error
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Register Now';
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+            }
+        });
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+            setTimeout(() => errorMessage.classList.remove('show'), 4000);
+        }
+
+        // Add animation for cards on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

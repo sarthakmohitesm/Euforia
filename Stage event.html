@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage Events - Euforia 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.15), rgba(59, 130, 246, 0.1));
+            animation: float 20s infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 90px;
+            height: 90px;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            left: 40%;
+            animation-delay: 4s;
+        }
+
+        .circle:nth-child(4) {
+            width: 70px;
+            height: 70px;
+            left: 80%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            animation: slideDown 0.8s ease;
+            border-bottom: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #dc2626, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 120px auto 50px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 56px;
+            margin-bottom: 70px;
+            background: linear-gradient(45deg, #dc2626, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .event-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+
+        .event-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(220, 38, 38, 0.4);
+            border-color: #dc2626;
+        }
+
+        .event-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            overflow: hidden;
+        }
+
+        .event-icon {
+            font-size: 64px;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .event-content {
+            padding: 30px;
+            text-align: left;
+        }
+
+        .event-content h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .event-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .register-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #dc2626, #991b1b);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.4s;
+            box-shadow: 0 5px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(220, 38, 38, 0.6);
+        }
+
+        .event-details {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 15px;
+        }
+
+        .event-details span {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 40px;
+                margin-bottom: 40px;
+            }
+
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">EUFORIA STAGE EVENTS</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="section-title">Stage Events</h1>
+        
+        <div class="event-grid">
+            <!-- Solo Dance -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">💃</div>
+                </div>
+                <div class="event-content">
+                    <h3>Solo Dance</h3>
+                    <p>Showcase your dance moves and compete with talented performers from across colleges. All dance styles welcome!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Team Size: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹200</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Duet Dance -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">💃</div>
+                </div>
+                <div class="event-content">
+                    <h3>Duet Dance</h3>
+                    <p>Showcase your dance moves and compete with talented performers from across colleges. All dance styles welcome!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Duo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹300</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Group Dance -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">💃</div>
+                </div>
+                <div class="event-content">
+                    <h3>Group Dance</h3>
+                    <p>Showcase your dance moves and compete with talented performers from across colleges. All dance styles welcome!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Team Size: 8 to 15</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹1000</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Solo Singing -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🎤</div>
+                </div>
+                <div class="event-content">
+                    <h3>Solo Singing</h3>
+                    <p>Show off your vocal talent and mesmerize the audience with your singing skills. All genres welcome!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹200</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Duet Singing -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🎵</div>
+                </div>
+                <div class="event-content">
+                    <h3>Duet Singing</h3>
+                    <p>Create amazing harmonies and melodies with your partner. Show off your vocal chemistry!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Duo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹300</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Rapping -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🎵</div>
+                </div>
+                <div class="event-content">
+                    <h3>Rapping</h3>
+                    <p>Express stories through rhythm and rhyme. Bring your unique flow to the stage!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹200</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- War of DJ -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">🎧</div>
+                </div>
+                <div class="event-content">
+                    <h3>War of DJ</h3>
+                    <p>Mix, scratch, and drop beats in this ultimate DJ battle. Show your mixing skills and control the crowd!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹500</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Mr. Euforia -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">👔</div>
+                </div>
+                <div class="event-content">
+                    <h3>Mr. Euforia</h3>
+                    <p>Compete for the most prestigious title showcasing personality, talent, and charisma on stage.</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹300</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Ms. Euforia -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">👗</div>
+                </div>
+                <div class="event-content">
+                    <h3>Ms. Euforia</h3>
+                    <p>Compete for the most prestigious title showcasing personality, talent, and charisma on stage.</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹300</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Euforia Classic B65 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">💪</div>
+                </div>
+                <div class="event-content">
+                    <h3>Euforia Classic B65</h3>
+                    <p>Showcase your physique and fitness in the bodybuilding competition for under 65kg category.</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹500</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Fashion Show -->
+            <div class="event-card">
+                <div class="event-image">
+                    <div class="event-icon">👗</div>
+                </div>
+                <div class="event-content">
+                    <h3>Fashion Show</h3>
+                    <p>Strut your style on the ramp. Theme: Futuristic Fusion - Where tradition meets tomorrow.</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Team Size: 8-15</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: ₹1000</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <div class="bg-animation">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            
+            <div class="form-wrapper">
+                <span class="close-btn">&times;</span>
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">✅</div>
+                    <div class="success-text">Registration Successful! Thank you for registering with Euforia 2026.</div>
+                </div>
+
+                <div class="error-message" id="errorMessage">
+                    Please fill in all required fields correctly.
+                </div>
+
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="event">Event Name *</label>
+                        <input type="text" id="event" name="event" readonly>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Register Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1;
+        }
+
+        .close-btn:hover {
+            color: #dc2626;
+            transform: scale(1.1);
+        }
+
+        /* Form Styles */
+        .form-wrapper {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(220, 38, 38, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #dc2626;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .success-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .success-text {
+            font-size: 16px;
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #fca5a5;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #dc2626, #991b1b);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('registrationModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const form = document.getElementById('registrationForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const eventInput = document.getElementById('event');
+
+        // Add click handlers for register buttons
+        document.querySelectorAll('.register-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const eventName = this.closest('.event-card').querySelector('h3').textContent;
+                eventInput.value = eventName;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close modal when clicking close button or outside
+        closeBtn.addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            form.reset();
+            successMessage.classList.remove('show');
+            errorMessage.classList.remove('show');
+        }
+
+        // Handle form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Get the submit button
+            const submitBtn = form.querySelector('.submit-btn');
+            
+            // Prevent multiple submissions
+            if (submitBtn.disabled) {
+                return;
+            }
+
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const event = document.getElementById('event').value.trim();
+
+            // Validation
+            if (!name || !email || !phone || !event) {
+                showError('Please fill in all required fields.');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('Please enter a valid email address.');
+                return;
+            }
+
+            // Phone validation
+            if (phone.length !== 10 || isNaN(phone)) {
+                showError('Please enter a valid 10-digit phone number.');
+                return;
+            }
+
+            // Disable submit button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.style.opacity = '0.6';
+            submitBtn.style.cursor = 'not-allowed';
+
+            try {
+                const response = await fetch('http://localhost:3000/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        event: event
+                    })
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    successMessage.classList.add('show');
+                    
+                    // Close modal after showing success
+                    setTimeout(() => {
+                        closeModal();
+                        // Re-enable button when modal is closed
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Register Now';
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.cursor = 'pointer';
+                    }, 2000);
+                } else {
+                    throw new Error('Registration failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Registration failed. Please try again.');
+                // Re-enable button on error
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Register Now';
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+            }
+        });
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+            setTimeout(() => errorMessage.classList.remove('show'), 4000);
+        }
+
+        // Add animation for cards on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

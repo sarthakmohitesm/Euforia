@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultural & Indoor Events - Euforia 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.1));
+            animation: float 20s infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 90px;
+            height: 90px;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            left: 40%;
+            animation-delay: 4s;
+        }
+
+        .circle:nth-child(4) {
+            width: 70px;
+            height: 70px;
+            left: 80%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 120px auto 50px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 56px;
+            margin-bottom: 70px;
+            background: linear-gradient(45deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .event-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .event-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.4);
+            border-color: #8b5cf6;
+        }
+
+        .event-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+            overflow: hidden;
+        }
+
+        .event-icon {
+            font-size: 64px;
+            filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .event-content {
+            padding: 30px;
+            text-align: left;
+        }
+
+        .event-content h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .event-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .register-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #8b5cf6, #6d28d9);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.4s;
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6);
+        }
+
+        .event-details {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 15px;
+        }
+
+        .event-details span {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .offline-badge {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.2);
+            border: 1px solid #f97316;
+            color: #f97316;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1;
+        }
+
+        .close-btn:hover {
+            color: #8b5cf6;
+            transform: scale(1.1);
+        }
+
+        .form-wrapper {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .success-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .success-text {
+            font-size: 16px;
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        .error-message {
+            display: none;
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #fca5a5;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #8b5cf6, #6d28d9);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 40px;
+                margin-bottom: 40px;
+            }
+
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <nav>
+        <div class="logo">EUFORIA CULTURAL</div>
+    </nav>
+
+    <div class="container">
+        <h1 class="section-title">Cultural & Indoor Events</h1>
+        
+        <div class="event-grid">
+            <div class="event-card">
+                <div class="event-image"><div class="event-icon">🎯</div></div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Carrom Singles</h3>
+                    <p>Test your precision and strategy in the classic board game of Carrom. Strike, pocket, and win solo!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: TBA</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-image"><div class="event-icon">🎯</div></div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Carrom Doubles</h3>
+                    <p>Team up with a partner and dominate the Carrom board! Coordination and skill lead to victory!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Team Size: 2</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: TBA</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-image"><div class="event-icon">♟️</div></div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Chess</h3>
+                    <p>The ultimate test of strategy and intellect. Checkmate your opponents and prove you're the grandmaster!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: TBA</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-image"><div class="event-icon">🏓</div></div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Table Tennis B</h3>
+                    <p>Fast reflexes and precision shots! Compete in the exciting sport of table tennis and smash your way to victory!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: TBA</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-image"><div class="event-icon">🎨</div></div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Mehandi</h3>
+                    <p>Showcase your intricate henna artistry! Create beautiful designs and mesmerize the judges with your creativity!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: TBA</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-image"><div class="event-icon">🌺</div></div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Rangoli</h3>
+                    <p>Celebrate tradition with vibrant colors! Design stunning rangoli patterns and display your artistic flair!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: TBA</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-image"><div class="event-icon">✏️</div></div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Drawing</h3>
+                    <p>Express yourself through art! Sketch, shade, and create masterpieces that tell a story!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: TBA</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-image"><div class="event-icon">🖼️</div></div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Glass Painting</h3>
+                    <p>Transform glass into art! Paint stunning designs on glass and showcase your unique artistic vision!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: TBA</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-image"><div class="event-icon">💅</div></div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Nail Art</h3>
+                    <p>Turn nails into tiny canvases! Create intricate and trendy nail art designs that stand out!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: TBA</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-image"><div class="event-icon">🎭</div></div>
+                <div class="event-content">
+                    <span class="offline-badge">OFFLINE</span>
+                    <h3>Freestyle</h3>
+                    <p>Unleash your creativity without limits! Any talent, any style - show us what makes you unique!</p>
+                    <div class="event-details">
+                        <span>🕒 Duration: TBA</span>
+                        <span>👥 Participation: Solo</span>
+                        <span>🏆 Prize Pool: TBA</span>
+                        <span>💰 Entry Fee: TBA</span>
+                    </div>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <div class="bg-animation">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            
+            <div class="form-wrapper">
+                <span class="close-btn">&times;</span>
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">✅</div>
+                    <div class="success-text">Registration Successful! Thank you for registering with Euforia 2026.</div>
+                </div>
+
+                <div class="error-message" id="errorMessage">
+                    Please fill in all required fields correctly.
+                </div>
+
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="event">Event Name *</label>
+                        <input type="text" id="event" name="event" readonly>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Register Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('registrationModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const form = document.getElementById('registrationForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const eventInput = document.getElementById('event');
+
+        document.querySelectorAll('.register-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const eventName = this.closest('.event-card').querySelector('h3').textContent;
+                eventInput.value = eventName;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            form.reset();
+            successMessage.classList.remove('show');
+            errorMessage.classList.remove('show');
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = form.querySelector('.submit-btn');
+            
+            if (submitBtn.disabled) {
+                return;
+            }
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const event = document.getElementById('event').value.trim();
+
+            if (!name || !email || !phone || !event) {
+                showError('Please fill in all required fields.');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('Please enter a valid email address.');
+                return;
+            }
+
+            if (phone.length !== 10 || isNaN(phone)) {
+                showError('Please enter a valid 10-digit phone number.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.style.opacity = '0.6';
+            submitBtn.style.cursor = 'not-allowed';
+
+            try {
+                const response = await fetch('http://localhost:3000/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        event: event
+                    })
+                });
+
+                if (response.ok) {
+                    successMessage.classList.add('show');
+                    
+                    setTimeout(() => {
+                        closeModal();
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Register Now';
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.cursor = 'pointer';
+                    }, 2000);
+                } else {
+                    throw new Error('Registration failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Registration failed. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Register Now';
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+            }
+        });
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+            setTimeout(() => errorMessage.classList.remove('show'), 4000);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
