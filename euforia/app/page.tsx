@@ -1,8 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import ScrollReveal from "./components/ScrollReveal";
 import FireflyOverlay from "./components/FireflyOverlay";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
 
 const ForestScene = dynamic(() => import("./components/ForestScene"), {
   ssr: false,
@@ -32,305 +35,67 @@ const sectionStyle: React.CSSProperties = {
 
 // Sunlit Ancient Stone Glassmorphic Card
 const glassCard: React.CSSProperties = {
-  background: "rgba(245, 250, 247, 0.7)",
+  background: "rgba(245, 250, 247, 0.75)",
   backdropFilter: "blur(24px)",
   WebkitBackdropFilter: "blur(24px)",
-  border: "1px solid rgba(27, 94, 32, 0.2)",
+  border: "1px solid rgba(27, 94, 32, 0.18)",
   borderRadius: "28px",
   padding: "3rem",
-  boxShadow: "0 15px 45px rgba(30, 41, 59, 0.08), inset 0 0 30px rgba(255, 255, 255, 0.5)",
+  boxShadow: "0 15px 45px rgba(30, 41, 59, 0.06), inset 0 0 30px rgba(255, 255, 255, 0.5)",
 };
 
 export default function Home() {
   return (
-    <main style={{ position: "relative", minHeight: "100vh", backgroundColor: "#f5faf7" }}>
+    <main className="relative min-h-screen bg-[#dfe5de] overflow-x-hidden selection:bg-orange-200 selection:text-orange-900">
+      
+      {/* ── CINEMATIC PHOTOREALISTIC BACKGROUND IMAGE OVERLAY ── */}
+      <div className="absolute top-0 left-0 right-0 h-screen z-0 overflow-hidden select-none pointer-events-none">
+        <Image
+          src="/forest-ruins-bg.png"
+          alt="Cinematic Forest Temple Ruins Landscape Background"
+          fill
+          priority
+          className="object-cover object-center scale-[1.01] brightness-[0.97] contrast-[1.01] saturate-[1.05]"
+        />
+        {/* Apple-level smooth gradient vignettes for premium blend */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#dfe5de]/20 via-transparent to-[#dfe5de] opacity-95" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#dfe5de] via-transparent to-[#dfe5de]/10 opacity-90" />
+      </div>
+
+      {/* ── DYNAMIC 3D WEBGL ENGINE & DRIFTING PARTICLES ── */}
       <ForestScene />
       <FireflyOverlay />
 
-      {/* ── ATMOSPHERIC GOLDEN JUNGLE RAY OVERLAY ── */}
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          background: "radial-gradient(circle at 75% 20%, rgba(255, 235, 59, 0.25) 0%, rgba(245, 250, 247, 0.1) 60%, rgba(226, 245, 236, 0.5) 100%)",
-          pointerEvents: "none",
-          zIndex: 1,
-        }}
-      />
+      {/* ── PREMIUM INTERACTIVE NAVBAR ── */}
+      <Navbar />
 
-      {/* ── ASYMMETRICAL TOP BAR ── */}
-      <header
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "100px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 6%",
-          zIndex: 100,
-          pointerEvents: "none",
-        }}
-      >
-        {/* Top Left Organic Badge */}
-        <div
-          style={{
-            pointerEvents: "auto",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.8rem",
-            background: "rgba(255, 255, 255, 0.75)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            padding: "0.7rem 1.6rem",
-            borderRadius: "100px",
-            border: "1px solid rgba(27, 94, 32, 0.18)",
-            boxShadow: "0 6px 20px rgba(15, 118, 110, 0.05)",
-          }}
-        >
-          <div
-            style={{
-              width: "12px",
-              height: "12px",
-              borderRadius: "50%",
-              backgroundColor: "#e65100",
-              boxShadow: "0 0 12px #e65100",
-              animation: "breathe 2.5s ease-in-out infinite",
-            }}
-          />
-          <span
-            style={{
-              fontFamily: "'Cinzel Decorative', serif",
-              fontSize: "0.95rem",
-              fontWeight: 800,
-              letterSpacing: "0.15em",
-              color: "#3e2723",
-            }}
-          >
-            EUFORIA X
-          </span>
-        </div>
-
-        {/* Top Right Capsule Navigation */}
-        <nav
-          style={{
-            pointerEvents: "auto",
-            display: "flex",
-            alignItems: "center",
-            gap: "2.2rem",
-            background: "rgba(255, 255, 255, 0.8)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            padding: "0.75rem 2.4rem",
-            borderRadius: "100px",
-            border: "1px solid rgba(27, 94, 32, 0.18)",
-            boxShadow: "0 6px 25px rgba(15, 118, 110, 0.06)",
-          }}
-        >
-          <a
-            href="#about"
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontSize: "0.92rem",
-              fontWeight: 700,
-              color: "#3e2723",
-              textDecoration: "none",
-              letterSpacing: "0.05em",
-              transition: "color 0.3s ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#e65100")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#3e2723")}
-          >
-            Decades
-          </a>
-          <a
-            href="#events"
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontSize: "0.92rem",
-              fontWeight: 700,
-              color: "#3e2723",
-              textDecoration: "none",
-              letterSpacing: "0.05em",
-              transition: "color 0.3s ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#e65100")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#3e2723")}
-          >
-            Gatherings
-          </a>
-          <a
-            href="#register"
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontSize: "0.92rem",
-              fontWeight: 700,
-              color: "#3e2723",
-              textDecoration: "none",
-              letterSpacing: "0.05em",
-              transition: "color 0.3s ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#e65100")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#3e2723")}
-          >
-            Claim Pass
-          </a>
-        </nav>
-      </header>
-
-      {/* ── ASYMMETRICAL EDITORIAL HERO SECTION ── */}
-      <section
-        id="hero"
-        style={{
-          ...sectionStyle,
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          padding: "130px 8% 60px",
-          gap: "4rem",
-        }}
-      >
-        {/* Left Side: Editorial Typography */}
-        <div style={{ flex: 1.25, textAlign: "left" }}>
-          <p
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontSize: "clamp(0.85rem, 1.8vw, 1.15rem)",
-              letterSpacing: "0.35em",
-              textTransform: "uppercase",
-              color: "#1b5e20",
-              fontWeight: 800,
-              marginBottom: "1rem",
-              animation: "fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both",
-            }}
-          >
-            Pillai HOC College Presents
-          </p>
-
-          <h1
-            style={{
-              fontFamily: "'Cinzel Decorative', serif",
-              fontSize: "clamp(3.8rem, 9vw, 8rem)",
-              fontWeight: 900,
-              backgroundImage: "linear-gradient(135deg, #3e2723 10%, #2e5d38 50%, #e65100 95%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              lineHeight: 0.95,
-              letterSpacing: "-0.01em",
-              margin: "0 0 1.2rem 0",
-              animation: "fadeInScale 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both",
-            }}
-          >
-            EUFORIA X
-          </h1>
-
-          <p
-            style={{
-              fontFamily: "'Cinzel', serif",
-              fontStyle: "italic",
-              fontSize: "clamp(1.2rem, 2.5vw, 2.0rem)",
-              fontWeight: 700,
-              color: "#f57c00",
-              letterSpacing: "0.05em",
-              marginBottom: "2rem",
-              animation: "fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both",
-            }}
-          >
-            Roots of Decades — A 10-Year Legacy
-          </p>
-
-          <div
-            style={{
-              width: "180px",
-              height: "4px",
-              background: "linear-gradient(to right, #1b5e20, #d81b60, transparent)",
-              borderRadius: "2px",
-              marginBottom: "2rem",
-              animation: "fadeInUp 1s ease 0.8s both",
-            }}
-          />
-        </div>
-      </section>
+      {/* ── STAGGERED ELEVATED HERO SECTION ── */}
+      <Hero />
 
       {/* ── DECADES TIMELINE SECTION ── */}
       <section id="about" style={{ ...sectionStyle, padding: "8rem 2rem 5rem", maxWidth: "1000px", margin: "0 auto" }}>
         <ScrollReveal>
           <div style={glassCard}>
             <h2
-              style={{
-                fontFamily: "'Cinzel Decorative', serif",
-                fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-                textAlign: "center",
-                marginBottom: "3.5rem",
-                background: "linear-gradient(135deg, #3e2723, #d81b60)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
+              className="font-['Cinzel_Decorative'] text-[clamp(28px,4vw,45px)] text-center font-black mb-[3.5rem] bg-gradient-to-r from-[#3e2723] to-[#e65100] bg-clip-text text-transparent"
             >
               ✦ Decade of Magic (2016-2026) ✦
             </h2>
 
             {/* Timeline path container */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                gap: "2rem",
-                position: "relative",
-              }}
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
               {timelineEvents.map((t, idx) => (
                 <div
                   key={t.year}
-                  style={{
-                    position: "relative",
-                    background: "rgba(255, 255, 255, 0.45)",
-                    border: "1px solid rgba(27, 94, 32, 0.12)",
-                    borderRadius: "18px",
-                    padding: "1.8rem",
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-5px)";
-                    e.currentTarget.style.borderColor = "rgba(216, 27, 96, 0.4)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.borderColor = "rgba(27, 94, 32, 0.12)";
-                  }}
+                  className="relative bg-white/40 border border-emerald-950/10 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-orange-500/40 hover:bg-white/60 hover:shadow-lg"
                 >
-                  <h3
-                    style={{
-                      fontFamily: "'Cinzel', serif",
-                      fontSize: "2rem",
-                      fontWeight: 900,
-                      color: "#d81b60",
-                      marginBottom: "0.4rem",
-                    }}
-                  >
+                  <h3 className="font-['Cinzel'] text-3xl font-black text-orange-600 mb-2">
                     {t.year}
                   </h3>
-                  <h4
-                    style={{
-                      fontFamily: "'Cinzel', serif",
-                      fontSize: "1.1rem",
-                      color: "#1b5e20",
-                      fontWeight: 700,
-                      marginBottom: "0.8rem",
-                    }}
-                  >
+                  <h4 className="font-['Cinzel'] text-[17px] text-emerald-800 font-bold mb-3">
                     {t.title}
                   </h4>
-                  <p
-                    style={{
-                      fontFamily: "'Outfit', sans-serif",
-                      fontSize: "0.88rem",
-                      color: "#5d4037",
-                      lineHeight: 1.6,
-                    }}
-                  >
+                  <p className="font-['Outfit'] text-[14px] text-stone-700 leading-relaxed">
                     {t.desc}
                   </p>
                 </div>
@@ -344,27 +109,13 @@ export default function Home() {
       <section id="events" style={{ ...sectionStyle, padding: "6rem 2rem 8rem", maxWidth: "1200px", margin: "0 auto" }}>
         <ScrollReveal>
           <h2
-            style={{
-              fontFamily: "'Cinzel Decorative', serif",
-              fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-              textAlign: "center",
-              marginBottom: "3.5rem",
-              background: "linear-gradient(135deg, #1b5e20, #f57c00)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
+            className="font-['Cinzel_Decorative'] text-[clamp(28px,4vw,45px)] text-center font-black mb-[3.5rem] bg-gradient-to-r from-emerald-800 to-orange-600 bg-clip-text text-transparent"
           >
             ✦ Ruins Gatherings ✦
           </h2>
         </ScrollReveal>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            gap: "1.8rem",
-          }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           {events.map((ev, i) => (
             <ScrollReveal key={ev.title} delay={i * 0.08}>
               <div
@@ -372,36 +123,18 @@ export default function Home() {
                   ...glassCard,
                   padding: "2.8rem 2.2rem",
                   cursor: "pointer",
-                  transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
                   position: "relative",
                   overflow: "hidden",
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-8px) scale(1.02)";
-                  e.currentTarget.style.borderColor = "rgba(216, 27, 96, 0.4)";
-                  e.currentTarget.style.boxShadow = "0 15px 40px rgba(216, 27, 96, 0.1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0) scale(1)";
-                  e.currentTarget.style.borderColor = "rgba(27, 94, 32, 0.2)";
-                  e.currentTarget.style.boxShadow = "0 15px 45px rgba(30, 41, 59, 0.08)";
-                }}
+                className="transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:border-orange-500/40 hover:shadow-[0_15px_40px_rgba(230,81,0,0.06)]"
               >
-                <div style={{ fontSize: "2.8rem", marginBottom: "1.2rem", filter: "drop-shadow(0 4px 10px rgba(27, 94, 32, 0.15))" }}>
+                <div className="text-[44px] mb-5 filter drop-shadow-[0_4px_10px_rgba(27,94,32,0.12)]">
                   {ev.icon}
                 </div>
-                <h3
-                  style={{
-                    fontFamily: "'Cinzel', serif",
-                    fontSize: "1.35rem",
-                    color: "#3e2723",
-                    fontWeight: 800,
-                    marginBottom: "0.6rem",
-                  }}
-                >
+                <h3 className="font-['Cinzel'] text-[21px] text-stone-850 font-extrabold mb-3">
                   {ev.title}
                 </h3>
-                <p style={{ fontFamily: "'Outfit', sans-serif", color: "#5d4037", fontSize: "0.96rem", lineHeight: 1.65 }}>
+                <p className="font-['Outfit'] text-stone-650 text-[15px] leading-relaxed">
                   {ev.desc}
                 </p>
               </div>
@@ -413,49 +146,18 @@ export default function Home() {
       {/* ── REGISTER / CALL TO ACTION ── */}
       <section id="register" style={{ ...sectionStyle, padding: "4rem 2rem 10rem", maxWidth: "700px", margin: "0 auto" }}>
         <ScrollReveal>
-          <div style={{ ...glassCard, textAlign: "center" }}>
+          <div style={{ ...glassCard, textAlign: "center" }} className="flex flex-col items-center">
             <h2
-              style={{
-                fontFamily: "'Cinzel Decorative', serif",
-                fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
-                marginBottom: "1.2rem",
-                background: "linear-gradient(135deg, #3e2723, #d81b60)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
+              className="font-['Cinzel_Decorative'] text-[clamp(24px,3.5vw,36px)] font-black mb-5 bg-gradient-to-r from-[#3e2723] to-[#e65100] bg-clip-text text-transparent"
             >
               Enter the Decades Gate
             </h2>
-            <p style={{ fontFamily: "'Outfit', sans-serif", color: "#5d4037", marginBottom: "2.4rem", lineHeight: 1.75, fontSize: "1.05rem" }}>
+            <p className="font-['Outfit'] text-stone-700 mb-9 leading-relaxed text-[16.5px] max-w-[550px]">
               Honor the history, unlock the future. Claim your digital ruins gatepass today and take part in legendary history.
             </p>
             <button
               id="register-btn"
-              style={{
-                fontFamily: "'Outfit', sans-serif",
-                fontSize: "1.02rem",
-                fontWeight: 800,
-                letterSpacing: "0.15rem",
-                textTransform: "uppercase",
-                padding: "1.2rem 3.6rem",
-                borderRadius: "100px",
-                background: "linear-gradient(135deg, #d81b60 0%, #ad1457 100%)",
-                border: "none",
-                color: "#ffffff",
-                cursor: "pointer",
-                transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-                boxShadow: "0 10px 25px rgba(216, 27, 96, 0.35)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px) scale(1.03)";
-                e.currentTarget.style.boxShadow = "0 15px 40px rgba(216, 27, 96, 0.55)";
-                e.currentTarget.style.background = "linear-gradient(135deg, #e91e63 0%, #d81b60 100%)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = "0 10px 25px rgba(216, 27, 96, 0.35)";
-                e.currentTarget.style.background = "linear-gradient(135deg, #d81b60 0%, #ad1457 100%)";
-              }}
+              className="font-['Outfit'] text-base font-extrabold tracking-[0.16em] uppercase px-12 py-[1.1rem] rounded-full text-white bg-gradient-to-r from-orange-600 to-orange-800 border-none cursor-pointer transition-all duration-500 shadow-[0_10px_25px_rgba(230,81,0,0.3)] hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_15px_40px_rgba(230,81,0,0.45)] hover:from-orange-500 hover:to-orange-700"
             >
               Register Now
             </button>
@@ -470,13 +172,13 @@ export default function Home() {
           textAlign: "center",
           padding: "4rem 2rem",
           borderTop: "1px solid rgba(27, 94, 32, 0.18)",
-          background: "rgba(245, 250, 247, 0.95)",
+          background: "rgba(223, 229, 222, 0.95)",
         }}
       >
-        <p style={{ fontFamily: "'Cinzel', serif", color: "#3e2723", fontSize: "0.95rem", letterSpacing: "0.15em", fontWeight: 800 }}>
+        <p className="font-['Cinzel'] text-stone-850 text-[15px] tracking-[0.15em] font-extrabold">
           © 2016 - 2026 Euforia — Pillai HOC College. A Decade of Excellence.
         </p>
-        <p style={{ fontFamily: "'Outfit', sans-serif", color: "#1b5e20", fontSize: "0.82rem", marginTop: "0.6rem", letterSpacing: "0.05em", fontWeight: 600 }}>
+        <p className="font-['Outfit'] text-emerald-800 text-[13px] mt-2 tracking-wider font-semibold">
           Crafted with ✦ moss, stones, and beautiful code ✦
         </p>
       </footer>
