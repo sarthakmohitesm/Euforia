@@ -54,7 +54,7 @@ function createAncientPillar(stoneTex: THREE.Texture): THREE.Group {
   const group = new THREE.Group();
 
   // Pillar Column - highly segmented for realistic fracture distortion
-  const columnGeo = new THREE.CylinderGeometry(0.24, 0.28, 3.6, 12, 16);
+  const columnGeo = new THREE.CylinderGeometry(0.24, 0.28, 3.6, 32, 32);
   const pos = columnGeo.attributes.position;
   for (let i = 0; i < pos.count; i++) {
     const x = pos.getX(i);
@@ -82,13 +82,13 @@ function createAncientPillar(stoneTex: THREE.Texture): THREE.Group {
   group.add(column);
 
   // Pillar Capital (stone header block)
-  const capGeo = new THREE.BoxGeometry(0.7, 0.22, 0.7);
+  const capGeo = new THREE.BoxGeometry(0.7, 0.22, 0.7, 8, 4, 8);
   const cap = new THREE.Mesh(capGeo, stoneMat);
   cap.position.y = 3.6 + 0.11;
   group.add(cap);
 
   // Pillar Base (stone footer block)
-  const baseGeo = new THREE.BoxGeometry(0.78, 0.35, 0.78);
+  const baseGeo = new THREE.BoxGeometry(0.78, 0.35, 0.78, 8, 4, 8);
   const base = new THREE.Mesh(baseGeo, stoneMat);
   base.position.y = 0.175;
   group.add(base);
@@ -118,7 +118,7 @@ function createTempleArch(stoneTex: THREE.Texture): THREE.Group {
   arch.add(pR);
 
   // Massive horizontal lintel (top arch stone)
-  const lintelGeo = new THREE.BoxGeometry(4.4, 0.45, 0.8);
+  const lintelGeo = new THREE.BoxGeometry(4.4, 0.45, 0.8, 32, 8, 8);
   const lPos = lintelGeo.attributes.position;
   for (let i = 0; i < lPos.count; i++) {
     const lx = lPos.getX(i);
@@ -214,13 +214,14 @@ function createRuinsTree(barkTex: THREE.Texture): THREE.Group {
   });
 
   for (const c of leafClusters) {
-    const leafGeo = new THREE.DodecahedronGeometry(c.r, 2);
+    const leafGeo = new THREE.IcosahedronGeometry(c.r, 3);
     const lPos = leafGeo.attributes.position;
     for (let i = 0; i < lPos.count; i++) {
       const lx = lPos.getX(i);
       const ly = lPos.getY(i);
       const lz = lPos.getZ(i);
-      const disp = (Math.sin(lx * 6) + Math.cos(ly * 6) + Math.sin(lz * 6)) * 0.06;
+      // Detailed leaves fractal noise shape
+      const disp = (Math.sin(lx * 9) + Math.cos(ly * 9) + Math.sin(lz * 9)) * 0.05;
       lPos.setX(i, lx + disp * lx);
       lPos.setY(i, ly + disp * ly);
       lPos.setZ(i, lz + disp * lz);
@@ -326,14 +327,16 @@ function createRuinsMushroom(): THREE.Group {
 // Organic boulder rock
 function createRealisticRock(mossTex: THREE.Texture): THREE.Group {
   const rock = new THREE.Group();
-  const geo = new THREE.DodecahedronGeometry(0.55, 1);
+  const geo = new THREE.IcosahedronGeometry(0.55, 3);
   const pos = geo.attributes.position;
   for (let i = 0; i < pos.count; i++) {
     const x = pos.getX(i);
     const y = pos.getY(i);
     const z = pos.getZ(i);
-    // Heavy noise displacement to make rock look jagged and natural
-    const d = (Math.sin(x * 7) * Math.cos(y * 5) + Math.sin(z * 6)) * 0.07;
+    // Sharp layered noise displacement to make rock look jagged, crystalline, and natural
+    const d1 = (Math.sin(x * 6) * Math.cos(y * 6) + Math.sin(z * 6)) * 0.08;
+    const d2 = (Math.sin(x * 15) * Math.cos(y * 12) + Math.sin(z * 15)) * 0.02; // Fine detail
+    const d = d1 + d2;
     pos.setX(i, x + d * x);
     pos.setY(i, y + d * y);
     pos.setZ(i, z + d * z);
@@ -341,10 +344,10 @@ function createRealisticRock(mossTex: THREE.Texture): THREE.Group {
   geo.computeVertexNormals();
 
   const mat = new THREE.MeshStandardMaterial({
-    color: 0x5a5f5c,
-    roughness: 0.85,
+    color: 0x4b514e,
+    roughness: 0.9,
     bumpMap: mossTex,
-    bumpScale: 0.08,
+    bumpScale: 0.12,
   });
   const mesh = new THREE.Mesh(geo, mat);
   rock.add(mesh);
@@ -449,11 +452,14 @@ export default function ForestScene() {
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true,
+      powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.1; // Deep golden-rich atmospheric lighting
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     container.appendChild(renderer.domElement);
 
     /* ── Scene & Deep Fog ── */
@@ -478,6 +484,16 @@ export default function ForestScene() {
     // Warm sunbeam highlights (Saffron / Sunchamber)
     const sunLight = new THREE.DirectionalLight(0xff9800, 2.5);
     sunLight.position.set(8, 14, 3);
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.width = 2048;
+    sunLight.shadow.mapSize.height = 2048;
+    sunLight.shadow.camera.near = 0.5;
+    sunLight.shadow.camera.far = 40;
+    sunLight.shadow.camera.left = -12;
+    sunLight.shadow.camera.right = 12;
+    sunLight.shadow.camera.top = 12;
+    sunLight.shadow.camera.bottom = -12;
+    sunLight.shadow.bias = -0.0004;
     scene.add(sunLight);
 
     // Cyan bioluminescent ground bounce
@@ -735,6 +751,14 @@ export default function ForestScene() {
     // Bioluminescent Butterflies & Relic Dust points
     const butterflies = createButterflies(250);
     scene.add(butterflies);
+
+    // Enable high-fidelity real-time PBR shadows for maximum premium depth
+    scene.traverse((node) => {
+      if (node instanceof THREE.Mesh) {
+        node.castShadow = true;
+        node.receiveShadow = true;
+      }
+    });
 
     /* ── Mouse tracking ── */
     const mouse = { x: 0, y: 0 };
