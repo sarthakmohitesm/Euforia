@@ -2,31 +2,41 @@
 
 import { useEffect, useState } from "react";
 
-interface Firefly {
+interface Pollen {
   id: number;
   x: number;
   y: number;
   size: number;
   delay: number;
   duration: number;
+  color: string;
 }
 
 export default function FireflyOverlay() {
-  const [fireflies, setFireflies] = useState<Firefly[]>([]);
+  const [pollens, setPollens] = useState<Pollen[]>([]);
 
   useEffect(() => {
-    const flies: Firefly[] = [];
-    for (let i = 0; i < 30; i++) {
-      flies.push({
+    const list: Pollen[] = [];
+    const colors = [
+      "rgba(234, 179, 8, 0.45)",  // Gold
+      "rgba(16, 185, 129, 0.35)",  // Emerald
+      "rgba(244, 114, 182, 0.4)",  // Pastel pink
+      "rgba(255, 255, 255, 0.6)",  // White cotton drift
+    ];
+
+    for (let i = 0; i < 40; i++) {
+      const size = 3 + Math.random() * 6;
+      list.push({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: 2 + Math.random() * 4,
-        delay: Math.random() * 8,
-        duration: 4 + Math.random() * 6,
+        size,
+        delay: Math.random() * 10,
+        duration: 8 + Math.random() * 8,
+        color: colors[Math.floor(Math.random() * colors.length)],
       });
     }
-    setFireflies(flies);
+    setPollens(list);
   }, []);
 
   return (
@@ -39,19 +49,20 @@ export default function FireflyOverlay() {
         overflow: "hidden",
       }}
     >
-      {fireflies.map((f) => (
+      {pollens.map((p) => (
         <div
-          key={f.id}
+          key={p.id}
           style={{
             position: "absolute",
-            left: `${f.x}%`,
-            top: `${f.y}%`,
-            width: `${f.size}px`,
-            height: `${f.size}px`,
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: `${p.size}px`,
+            height: `${p.size}px`,
             borderRadius: "50%",
-            background: `radial-gradient(circle, #ffd700 0%, rgba(255,215,0,0.3) 60%, transparent 100%)`,
-            boxShadow: `0 0 ${f.size * 3}px ${f.size}px rgba(255,215,0,0.4)`,
-            animation: `firefly ${f.duration}s ${f.delay}s ease-in-out infinite`,
+            background: p.color,
+            filter: "blur(1px)",
+            boxShadow: `0 0 ${p.size * 2.5}px rgba(255, 255, 255, 0.5)`,
+            animation: `pollen-drift ${p.duration}s ${p.delay}s ease-in-out infinite`,
           }}
         />
       ))}

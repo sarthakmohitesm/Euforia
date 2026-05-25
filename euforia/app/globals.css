@@ -1,23 +1,24 @@
 @import "tailwindcss";
 
-/* ─── Magical Forest Design Tokens ─── */
+/* ─── Luminous sunlit magical forest design tokens ─── */
 :root {
-  --bg-deep: #030a06;
-  --bg-forest: #061a0e;
-  --bg-canopy: #0a2615;
-  --bg-moss: #0f3320;
-  --green-glow: #00ff88;
-  --green-bright: #22ff99;
-  --green-mid: #0ecc6e;
-  --green-soft: #0b9e55;
-  --green-muted: #177a45;
-  --gold-firefly: #ffd700;
-  --gold-soft: #f5c842;
-  --purple-mystic: #9b59b6;
-  --blue-mist: #3ad8c8;
-  --text-primary: #e8f5e9;
-  --text-secondary: #a5d6a7;
-  --text-dim: #66bb6a;
+  --bg-deep: #f7fdfa;
+  --bg-forest: #effaf4;
+  --bg-canopy: #e1f7ec;
+  --bg-moss: #cbf3dd;
+  --green-glow: #10b981;
+  --green-bright: #34d399;
+  --green-mid: #059669;
+  --green-soft: #047857;
+  --green-muted: #065f46;
+  --gold-firefly: #d97706;
+  --gold-soft: #eab308;
+  --purple-mystic: #c084fc;
+  --blue-mist: #2dd4bf;
+  --pink-blossom: #f472b6;
+  --text-primary: #064e3b;
+  --text-secondary: #0f766e;
+  --text-dim: #1b8a5a;
   --font-display: 'Cinzel Decorative', serif;
   --font-heading: 'Cinzel', serif;
   --font-body: 'Outfit', sans-serif;
@@ -50,6 +51,7 @@ body {
   font-family: 'Outfit', sans-serif;
   overflow-x: hidden;
   cursor: default;
+  transition: background-color 0.5s ease;
 }
 
 /* ─── Custom Scrollbar ─── */
@@ -60,14 +62,14 @@ body {
   background: var(--bg-deep);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--green-glow), var(--green-soft));
+  background: linear-gradient(180deg, var(--green-glow), var(--green-bright));
   border-radius: 3px;
 }
 
 /* ─── Selection ─── */
 ::selection {
-  background: rgba(0, 255, 136, 0.3);
-  color: var(--green-bright);
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--green-muted);
 }
 
 /* ─── Utility Animations ─── */
@@ -89,9 +91,15 @@ body {
 }
 @keyframes firefly {
   0%, 100% { opacity: 0; transform: translate(0, 0) scale(0.5); }
-  20% { opacity: 1; transform: translate(10px, -15px) scale(1); }
-  50% { opacity: 0.6; transform: translate(-5px, -30px) scale(0.8); }
-  80% { opacity: 1; transform: translate(15px, -10px) scale(1); }
+  20% { opacity: 0.9; transform: translate(12px, -18px) scale(1); }
+  50% { opacity: 0.5; transform: translate(-8px, -35px) scale(0.7); }
+  80% { opacity: 0.9; transform: translate(18px, -12px) scale(1); }
+}
+@keyframes pollen-drift {
+  0%, 100% { opacity: 0; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+  25% { opacity: 0.8; transform: translate(15px, -20px) scale(1) rotate(45deg); }
+  50% { opacity: 0.4; transform: translate(-10px, -45px) scale(0.6) rotate(90deg); }
+  75% { opacity: 0.8; transform: translate(20px, -25px) scale(0.9) rotate(135deg); }
 }
 @keyframes vine-grow {
   from { stroke-dashoffset: 1000; }
@@ -102,7 +110,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.9); }
+  from { opacity: 0; transform: scale(0.92); }
   to { opacity: 1; transform: scale(1); }
 }
 @keyframes rotate-slow {
@@ -110,8 +118,8 @@ body {
   to { transform: rotate(360deg); }
 }
 @keyframes breathe {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.05); opacity: 1; }
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.04); opacity: 1; }
 }
 @keyframes textReveal {
   from { clip-path: inset(0 100% 0 0); }
