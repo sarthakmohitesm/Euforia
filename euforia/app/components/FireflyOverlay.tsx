@@ -18,10 +18,9 @@ export default function FireflyOverlay() {
   useEffect(() => {
     const list: Pollen[] = [];
     const colors = [
-      "rgba(234, 179, 8, 0.45)",  // Gold
-      "rgba(16, 185, 129, 0.35)",  // Emerald
-      "rgba(244, 114, 182, 0.4)",  // Pastel pink
-      "rgba(255, 255, 255, 0.6)",  // White cotton drift
+      "rgba(255, 235, 59, 0.45)",  // Golden relics dust
+      "rgba(245, 124, 0, 0.35)",   // Warm sunburst orange
+      "rgba(255, 255, 255, 0.6)",  // White cotton spores
     ];
 
     for (let i = 0; i < 40; i++) {

@@ -402,25 +402,29 @@ function createButterflies(count: number): THREE.Points {
 function createVolumetricSunbeams(): THREE.Group {
   const group = new THREE.Group();
   const beamMat = new THREE.MeshBasicMaterial({
-    color: 0xfffbe6,
+    color: 0xfff3db, // Warm golden sun shafts
     transparent: true,
-    opacity: 0.055,
+    opacity: 0.08,
     blending: THREE.AdditiveBlending,
     side: THREE.DoubleSide,
     depthWrite: false,
   });
 
-  const beamGeo1 = new THREE.CylinderGeometry(0.18, 1.3, 10, 16, 1, true);
-  const beam1 = new THREE.Mesh(beamGeo1, beamMat);
-  beam1.position.set(4, 5, -2);
-  beam1.rotation.set(0.35, 0, -0.38);
-  group.add(beam1);
+  // Multiple cascading light beams
+  const beams = [
+    { r1: 0.15, r2: 1.8, h: 14, x: 5, y: 4, z: -3, rx: 0.35, rz: -0.45 },
+    { r1: 0.1, r2: 1.2, h: 11, x: 2, y: 3.5, z: -1, rx: 0.3, rz: -0.4 },
+    { r1: 0.08, r2: 0.9, h: 9, x: 7, y: 4.5, z: -5, rx: 0.38, rz: -0.48 },
+    { r1: 0.12, r2: 1.4, h: 12, x: -1, y: 3.8, z: 2, rx: 0.28, rz: -0.38 },
+  ];
 
-  const beamGeo2 = new THREE.CylinderGeometry(0.12, 0.9, 8, 16, 1, true);
-  const beam2 = new THREE.Mesh(beamGeo2, beamMat);
-  beam2.position.set(-2, 4, 1.5);
-  beam2.rotation.set(0.3, 0, -0.32);
-  group.add(beam2);
+  for (const b of beams) {
+    const geo = new THREE.CylinderGeometry(b.r1, b.r2, b.h, 16, 1, true);
+    const beam = new THREE.Mesh(geo, beamMat);
+    beam.position.set(b.x, b.y, b.z);
+    beam.rotation.set(b.rx, 0, b.rz);
+    group.add(beam);
+  }
 
   return group;
 }
@@ -464,9 +468,9 @@ export default function ForestScene() {
 
     /* ── Scene & Deep Fog ── */
     const scene = new THREE.Scene();
-    // Warm sunlit jungle mist fog
-    scene.fog = new THREE.FogExp2(0xf5faf7, 0.065);
-    scene.background = new THREE.Color(0xf5faf7);
+    // Warm sunlit golden-green forest mist fog matching photographic mockup
+    scene.fog = new THREE.FogExp2(0xdfe5de, 0.055);
+    scene.background = new THREE.Color(0xdfe5de);
 
     /* ── Camera ── */
     const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
@@ -478,12 +482,12 @@ export default function ForestScene() {
     const barkTexture = createProceduralTexture("bark");
 
     /* ── Cinematic Lights ── */
-    const ambientLight = new THREE.AmbientLight(0xdcfce7, 1.05); // Rich green bounce
+    const ambientLight = new THREE.AmbientLight(0xaec4b2, 1.4); // Rich warm forest floor bounce
     scene.add(ambientLight);
 
-    // Warm sunbeam highlights (Saffron / Sunchamber)
-    const sunLight = new THREE.DirectionalLight(0xff9800, 2.5);
-    sunLight.position.set(8, 14, 3);
+    // Photographic warm sunbeam highlights shining from back-right
+    const sunLight = new THREE.DirectionalLight(0xfff7e6, 3.5);
+    sunLight.position.set(12, 10, -6);
     sunLight.castShadow = true;
     sunLight.shadow.mapSize.width = 2048;
     sunLight.shadow.mapSize.height = 2048;
@@ -496,17 +500,7 @@ export default function ForestScene() {
     sunLight.shadow.bias = -0.0004;
     scene.add(sunLight);
 
-    // Cyan bioluminescent ground bounce
-    const floorGlow = new THREE.PointLight(0x00f3ff, 1.6, 15);
-    floorGlow.position.set(0, 0.3, 0);
-    scene.add(floorGlow);
-
-    // Saffron ruins glow
-    const relicsLight = new THREE.PointLight(0xff5722, 1.2, 12);
-    relicsLight.position.set(3, 3.2, -2);
-    scene.add(relicsLight);
-
-    // Volumetric light rays
+    // Volumetric light rays (atmospheric god rays streaming down)
     const lightbeams = createVolumetricSunbeams();
     scene.add(lightbeams);
 
@@ -932,10 +926,6 @@ export default function ForestScene() {
       // Pulsate butterfly bioluminescent glows
       (butterflies.material as THREE.PointsMaterial).opacity =
         0.7 + Math.sin(elapsed * 2.0) * 0.25;
-
-      // Animated lights
-      floorGlow.intensity = 1.4 + Math.sin(elapsed * 0.8) * 0.2;
-      relicsLight.position.x = 3 + Math.sin(elapsed * 0.2) * 1.5;
 
       renderer.render(scene, camera);
     }

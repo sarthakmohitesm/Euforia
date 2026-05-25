@@ -2,10 +2,10 @@
 
 /* ─── Luminous sunlit magical forest design tokens ─── */
 :root {
-  --bg-deep: #f7fdfa;
-  --bg-forest: #effaf4;
-  --bg-canopy: #e1f7ec;
-  --bg-moss: #cbf3dd;
+  --bg-deep: #dfe5de;
+  --bg-forest: #e2ece9;
+  --bg-canopy: #dae2db;
+  --bg-moss: #bcd1c2;
   --green-glow: #10b981;
   --green-bright: #34d399;
   --green-mid: #059669;

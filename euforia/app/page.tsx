@@ -95,8 +95,8 @@ export default function Home() {
               width: "12px",
               height: "12px",
               borderRadius: "50%",
-              backgroundColor: "#d81b60",
-              boxShadow: "0 0 12px #d81b60",
+              backgroundColor: "#e65100",
+              boxShadow: "0 0 12px #e65100",
               animation: "breathe 2.5s ease-in-out infinite",
             }}
           />
@@ -140,7 +140,7 @@ export default function Home() {
               letterSpacing: "0.05em",
               transition: "color 0.3s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#d81b60")}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#e65100")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "#3e2723")}
           >
             Decades
@@ -156,7 +156,7 @@ export default function Home() {
               letterSpacing: "0.05em",
               transition: "color 0.3s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#d81b60")}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#e65100")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "#3e2723")}
           >
             Gatherings
@@ -172,7 +172,7 @@ export default function Home() {
               letterSpacing: "0.05em",
               transition: "color 0.3s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#d81b60")}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#e65100")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "#3e2723")}
           >
             Claim Pass
@@ -214,7 +214,7 @@ export default function Home() {
               fontFamily: "'Cinzel Decorative', serif",
               fontSize: "clamp(3.8rem, 9vw, 8rem)",
               fontWeight: 900,
-              backgroundImage: "linear-gradient(135deg, #3e2723 20%, #1b5e20 50%, #d81b60 90%)",
+              backgroundImage: "linear-gradient(135deg, #3e2723 10%, #2e5d38 50%, #e65100 95%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               lineHeight: 0.95,
